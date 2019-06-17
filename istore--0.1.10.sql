@@ -70,7 +70,7 @@ CREATE FUNCTION fetchval(istore, integer)
     LANGUAGE C IMMUTABLE STRICT;
 
 CREATE FUNCTION each(IN is istore,
-    OUT key integer,
+    OUT key bigint,
     OUT value integer)
 RETURNS SETOF record
 AS 'istore','istore_each'
@@ -532,7 +532,7 @@ CREATE FUNCTION fetchval(bigistore, integer)
     LANGUAGE C IMMUTABLE STRICT;
 
 CREATE FUNCTION each(IN is bigistore,
-    OUT key integer,
+    OUT key bigint,
     OUT value bigint)
 RETURNS SETOF record
 AS 'istore','bigistore_each'
