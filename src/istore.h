@@ -31,7 +31,7 @@
  */
 typedef struct
 {
-    int32 key;
+    int64 key;
     int32 val;
 } IStorePair;
 
@@ -58,7 +58,7 @@ typedef struct
 
 typedef struct
 {
-    int32 key;
+    int64 key;
     int64 val;
 } BigIStorePair;
 
@@ -79,16 +79,17 @@ typedef struct
 
 void istore_copy_and_add_buflen(IStore *istore, BigIStorePair *pairs);
 void istore_pairs_init(IStorePairs *pairs, size_t initial_size);
-void istore_pairs_insert(IStorePairs *pairs, int32 key, int32 val);
+void istore_pairs_insert(IStorePairs *pairs, int64 key, int32 val);
 void istore_tree_to_pairs(AvlNode *p, IStorePairs *pairs);
 int  is_pair_buf_len(IStorePair *pair);
 void bigistore_add_buflen(BigIStore *istore);
 void bigistore_pairs_init(BigIStorePairs *pairs, size_t initial_size);
-void bigistore_pairs_insert(BigIStorePairs *pairs, int32 key, int64 val);
+void bigistore_pairs_insert(BigIStorePairs *pairs, int64 key, int64 val);
 void bigistore_tree_to_pairs(AvlNode *p, BigIStorePairs *pairs);
 int  bigis_pair_buf_len(BigIStorePair *pair);
 
 int is_int32_arr_comp(const void *a, const void *b);
+int is_int64_arr_comp(const void *a, const void *b);
 
 #define BUFLEN_OFFSET 8
 #define MAX(_a, _b) ((_a > _b) ? _a : _b)

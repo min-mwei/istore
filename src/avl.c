@@ -35,9 +35,9 @@ istore_make_empty(AvlNode *t)
  * find a node for a given key
  */
 AvlNode *
-is_tree_find(int32 key, AvlNode *t)
+is_tree_find(int64 key, AvlNode *t)
 {
-    int32 cmp;
+    int64 cmp;
 
     if (t == NULL)
         return NULL;
@@ -142,7 +142,7 @@ is_tree_length(AvlNode *t)
  * insert key/value into tree
  */
 AvlNode *
-is_tree_insert(AvlNode *t, int32 key, int64 value)
+is_tree_insert(AvlNode *t, int64 key, int64 value)
 {
     if (t == NULL)
     {
@@ -161,7 +161,7 @@ is_tree_insert(AvlNode *t, int32 key, int64 value)
     }
     else
     {
-        int32 cmp = COMPARE(key, t->key);
+        int64 cmp = COMPARE(key, t->key);
         if (cmp < 0)
         {
             t->left = is_tree_insert(t->left, key, value);

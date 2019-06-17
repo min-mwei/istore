@@ -83,7 +83,7 @@ istore_pairs_init(IStorePairs *pairs, size_t initial_size)
  * insert key value to IStorePairs
  */
 void
-istore_pairs_insert(IStorePairs *pairs, int32 key, int32 val)
+istore_pairs_insert(IStorePairs *pairs, int64 key, int32 val)
 {
     if (pairs->size == pairs->used)
     {
@@ -137,7 +137,7 @@ bigistore_pairs_init(BigIStorePairs *pairs, size_t initial_size)
  * insert key value to BigIStorePairs
  */
 void
-bigistore_pairs_insert(BigIStorePairs *pairs, int32 key, int64 val)
+bigistore_pairs_insert(BigIStorePairs *pairs, int64 key, int64 val)
 {
     if (pairs->size == pairs->used)
     {

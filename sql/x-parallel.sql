@@ -85,10 +85,10 @@ BEGIN
     EXECUTE $E$ ALTER FUNCTION divide(bigistore, bigistore) PARALLEL SAFE                                             $E$;
     EXECUTE $E$ ALTER FUNCTION divide(bigistore, bigint) PARALLEL SAFE                                                $E$;
     EXECUTE $E$ ALTER FUNCTION concat(bigistore, bigistore) PARALLEL SAFE                                             $E$;
-    EXECUTE $E$ ALTER FUNCTION bigistore(integer[]) PARALLEL SAFE                                                     $E$;
+    EXECUTE $E$ ALTER FUNCTION bigistore(bigint[]) PARALLEL SAFE                                                     $E$;
     EXECUTE $E$ ALTER FUNCTION sum_up(bigistore) PARALLEL SAFE                                                        $E$;
     EXECUTE $E$ ALTER FUNCTION sum_up(bigistore, integer) PARALLEL SAFE                                               $E$;
-    EXECUTE $E$ ALTER FUNCTION bigistore(integer[], integer[]) PARALLEL SAFE                                          $E$;
+    EXECUTE $E$ ALTER FUNCTION bigistore(bigint[], bigint[]) PARALLEL SAFE                                          $E$;
     EXECUTE $E$ ALTER FUNCTION bigistore(integer[], bigint[]) PARALLEL SAFE                                           $E$;
     EXECUTE $E$ ALTER FUNCTION istore(integer[], bigint[]) PARALLEL SAFE                                              $E$;
     EXECUTE $E$ ALTER FUNCTION fill_gaps(bigistore, integer, bigint) PARALLEL SAFE                                    $E$;
@@ -214,4 +214,3 @@ BEGIN
   END IF;
 END;
 $$;
-

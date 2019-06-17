@@ -13,7 +13,7 @@
         bool neg = false;                                                    \
         if (*(_parser->ptr) == '-')                                          \
             neg = true;                                                      \
-        _l   = strtol(_parser->ptr, &_parser->ptr, 10);                      \
+        _l   = strtoll(_parser->ptr, &_parser->ptr, 10);                      \
         _num = _l;                                                           \
         if ((neg && _num > 0) || (_l == LONG_MIN) )                          \
             ereport(ERROR,                                                   \
@@ -41,7 +41,7 @@
 AvlNode*
 is_parse(ISParser *parser)
 {
-    int32    key;
+    int64    key;
     int64    val;
 
     parser->state = WKEY;

@@ -56,7 +56,7 @@ CREATE TYPE bigistore (
     SEND    = bigistore_send,
     STORAGE = EXTENDED
 );
- 
+
 --source file sql/istore.sql
 
 CREATE FUNCTION exist(istore, integer)
@@ -134,6 +134,11 @@ CREATE FUNCTION divide(istore, integer)
 CREATE FUNCTION concat(istore, istore)
     RETURNS istore
     AS 'istore', 'istore_concat'
+    LANGUAGE C IMMUTABLE STRICT;
+
+CREATE FUNCTION istore(bigint[])
+    RETURNS istore
+    AS 'istore', 'istore_from_intarray'
     LANGUAGE C IMMUTABLE STRICT;
 
 CREATE FUNCTION istore(integer[])
@@ -498,7 +503,7 @@ AS
     FUNCTION 3 gin_extract_istore_key_query(internal, internal, int2, internal, internal),
     FUNCTION 4 gin_consistent_istore_key(internal, int2, internal, int4, internal, internal),
     STORAGE  integer;
- 
+
 --source file sql/casts.sql
 
 CREATE FUNCTION istore(bigistore)
@@ -513,7 +518,7 @@ CREATE FUNCTION bigistore(istore)
 
 CREATE CAST (istore as bigistore) WITH FUNCTION bigistore(istore) AS IMPLICIT;
 CREATE CAST (bigistore as istore) WITH FUNCTION istore(bigistore) AS ASSIGNMENT;
- 
+
 --source file sql/bigistore.sql
 
 CREATE FUNCTION exist(bigistore, integer)
@@ -593,6 +598,11 @@ CREATE FUNCTION concat(bigistore, bigistore)
     AS 'istore', 'bigistore_concat'
     LANGUAGE C IMMUTABLE STRICT;
 
+CREATE FUNCTION bigistore(bigint[])
+    RETURNS bigistore
+    AS 'istore', 'bigistore_from_intarray'
+    LANGUAGE C IMMUTABLE STRICT;
+
 CREATE FUNCTION bigistore(integer[])
     RETURNS bigistore
     AS 'istore', 'bigistore_from_intarray'
@@ -613,14 +623,29 @@ CREATE FUNCTION bigistore(integer[], integer[])
     AS 'istore', 'bigistore_array_add'
     LANGUAGE C IMMUTABLE STRICT;
 
+CREATE FUNCTION bigistore(bigint[], integer[])
+    RETURNS bigistore
+    AS 'istore', 'bigistore_array_add'
+    LANGUAGE C IMMUTABLE STRICT;
+
 CREATE FUNCTION bigistore(integer[], bigint[])
+    RETURNS bigistore
+    AS 'istore', 'bigistore_array_add'
+    LANGUAGE C IMMUTABLE STRICT;
+
+CREATE FUNCTION bigistore(bigint[], bigint[])
+    RETURNS bigistore
+    AS 'istore', 'bigistore_array_add'
+    LANGUAGE C IMMUTABLE STRICT;
+
+CREATE FUNCTION istore(bigint[], bigint[])
     RETURNS bigistore
     AS 'istore', 'bigistore_array_add'
     LANGUAGE C IMMUTABLE STRICT;
 
 CREATE FUNCTION istore(integer[], bigint[])
     RETURNS bigistore
-    AS 'istore', 'bigistore_array_add'
+    AS 'istore', 'istore_array_add'
     LANGUAGE C IMMUTABLE STRICT;
 
 CREATE FUNCTION fill_gaps(bigistore, integer, bigint DEFAULT 0)
@@ -941,7 +966,7 @@ AS
     FUNCTION 3 gin_extract_istore_key_query(internal, internal, int2, internal, internal),
     FUNCTION 4 gin_consistent_istore_key(internal, int2, internal, int4, internal, internal),
     STORAGE  integer;
- 
+
 --source file sql/x-parallel.sql
 
 DO $$
@@ -1155,5 +1180,3 @@ BEGIN
   END IF;
 END;
 $$;
-
- 
